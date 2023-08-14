@@ -37,41 +37,35 @@ pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 		return true
 	}
 
-	// Check if the current board configuration has been visited before
 	if visited.contains(board)
 	{
 		return false
 	}
 	visited.insert(*board);
 
-	// Iterate over each peg cell in the board
+	let is_peg = |&(_, value): &(usize, &Option<bool>)| -> bool {X == *value};
+	let with_directions = |(index, _)| DIRECTIONS.map(|direction| (index, direction));
 	let valid_moves: Vec<_> = board
 		.iter()
 		.flatten()
 		.enumerate()
-		.filter(|(_, value)| X == **value)
-		.flat_map(|(index, _)| DIRECTIONS.map(|direction| (index, direction)))
-		// Iterate over possible plays
+		.filter(is_peg)
+		.flat_map(with_directions)
 		.map(cell_and_direction_to_play::<COLUMNS>)
-		// Check if the play is valid
 		.filter_map(|play| filter_valid_play::<ROWS, COLUMNS>(board, play))
 		.collect();
 
-	// Try all valid moves
 	for (start, middle, end) in valid_moves
 	{
-		// Play the move
 		play_move(board, start, middle, end);
 		plays.push(Play { start, end, state: *board });
 
-		// Recursively solve the remaining board
 		if solve(board, plays, visited)
 		{
 			visited.insert(*board);
 			return true;
 		}
 
-		// Undo the play
 		unplay_move(board, start, middle, end);
 		plays.pop();
 	}
