@@ -7,22 +7,22 @@ pub enum Direction
 	Down,
 	Left,
 	Right,
-    To,
-    Fro
+	To,
+	Fro,
 }
 
 impl Direction
 {
-    pub const fn to_delta(self) -> Position<isize>
-    {
-        match self
-        {
-            Direction::Up => Position(-1, 0),
-            Direction::Down => Position(1, 0),
-            Direction::Left => Position(0, -1),
-            Direction::Right => Position(0, 1),
-            Direction::To => Position(-1, 1),
-            Direction::Fro => Position(1, -1),
-        }
-    }
+	pub const fn to_delta(self) -> Position<isize>
+	{
+		match self
+		{
+			Direction::Up => Position(-1, 0),
+			Direction::Down => Position(1, 0),
+			Direction::Left => Position(0, -1),
+			Direction::Right => Position(0, 1),
+			Direction::To => Position(-1, 1),
+			Direction::Fro => Position(1, -1),
+		}
+	}
 }
