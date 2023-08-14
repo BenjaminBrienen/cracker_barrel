@@ -3,7 +3,6 @@ use std::{
 	ops::{
 		Add,
 		Mul,
-		Sub,
 	},
 };
 
@@ -23,29 +22,16 @@ impl<T: Add<Output = T> + Copy> Add for Position<T>
 	}
 }
 
-impl<T: Sub<Output = T> + Copy> Sub for Position<T>
-{
-	type Output = Position<T>;
-
-	fn sub(
-		self,
-		rhs: Self,
-	) -> Self::Output
-	{
-		Position(self.0 - rhs.0, self.1 - rhs.1)
-	}
-}
-
-impl<T: Mul<Output = T> + Copy> Mul for Position<T>
+impl<T: Mul<Output = T> + Copy> Mul<T> for Position<T>
 {
 	type Output = Position<T>;
 
 	fn mul(
 		self,
-		rhs: Self,
+		rhs: T,
 	) -> Self::Output
 	{
-		Position(self.0 * rhs.0, self.1 * rhs.1)
+		Position(self.0 * rhs, self.1 * rhs)
 	}
 }
 
@@ -126,7 +112,7 @@ mod tests
 	) -> Position<isize>
 	{
 		let delta = direction.to_delta();
-		position + delta * Position(magnitude, magnitude)
+		position + delta * magnitude
 	}
 
 	#[test_case(Position(3, 3), 3, 3 => None)]

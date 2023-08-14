@@ -101,7 +101,7 @@ fn cell_and_direction_to_play(
 	#[allow(clippy::cast_possible_wrap)]
 	let start = Position(row as isize, column as isize);
 	let middle = start + delta;
-	let end = start + delta * Position(2, 2);
+	let end = start + delta * 2;
 	(start, middle, end)
 }
 
