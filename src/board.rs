@@ -21,18 +21,36 @@ pub const X: Option<bool> = Some(true);
 /// Not part of the board
 pub const I: Option<bool> = None;
 
+use {
+	once_cell::sync::Lazy,
+	std::time::Instant,
+};
+
+pub static CLOCK: Lazy<Instant> = Lazy::new(Instant::now);
+
 pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 	board: &mut Board<ROWS, COLUMNS>,
 	plays: &mut Vec<Play<ROWS, COLUMNS>>,
 	visited: &mut HashSet<Board<ROWS, COLUMNS>>,
+	best_min: &mut usize,
 ) -> bool
 {
-	if board
+	let count = board
 		.iter()
 		.flatten()
 		.filter(|cell| cell.is_some_and(|value| value))
-		.count()
-		== 1
+		.count();
+	if count < *best_min
+	{
+		println!("Best min: {best_min}");
+		*best_min = count;
+	}
+	if visited.len() % 1_000_000 == 0
+	{
+		println!("Elapsed seconds: {}", CLOCK.elapsed().as_secs_f32());
+		println!("# of visited boards: {}", visited.len());
+	}
+	if count == 1
 	{
 		return true
 	}
@@ -43,7 +61,7 @@ pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 	}
 	visited.insert(*board);
 
-	let is_peg = |&(_, value): &(usize, &Option<bool>)| -> bool {X == *value};
+	let is_peg = |&(_, value): &(usize, &Option<bool>)| -> bool { X == *value };
 	let with_directions = |(index, _)| DIRECTIONS.map(|direction| (index, direction));
 	let valid_moves: Vec<_> = board
 		.iter()
@@ -60,10 +78,10 @@ pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 		play_move(board, start, middle, end);
 		plays.push(Play { start, end, state: *board });
 
-		if solve(board, plays, visited)
+		if solve(board, plays, visited, best_min)
 		{
 			visited.insert(*board);
-			return true;
+			return true
 		}
 
 		unplay_move(board, start, middle, end);
@@ -72,8 +90,10 @@ pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 	false
 }
 
-fn filter_valid_play<const ROWS: usize, const COLUMNS: usize>(board: &Board<ROWS, COLUMNS>, (start, middle, end): (Position<isize>, Position<isize>, Position<isize>))
-	-> Option<(Position<usize>, Position<usize>, Position<usize>)>
+fn filter_valid_play<const ROWS: usize, const COLUMNS: usize>(
+	board: &Board<ROWS, COLUMNS>,
+	(start, middle, end): (Position<isize>, Position<isize>, Position<isize>),
+) -> Option<(Position<usize>, Position<usize>, Position<usize>)>
 {
 	let max = Position(ROWS, COLUMNS);
 	let min = Position(0, 0);
@@ -92,9 +112,7 @@ fn filter_valid_play<const ROWS: usize, const COLUMNS: usize>(board: &Board<ROWS
 	}
 }
 
-fn cell_and_direction_to_play<const COLUMNS: usize>(
-	(index, direction): (usize, Direction),
-) -> (Position<isize>, Position<isize>, Position<isize>)
+fn cell_and_direction_to_play<const COLUMNS: usize>((index, direction): (usize, Direction)) -> (Position<isize>, Position<isize>, Position<isize>)
 {
 	let delta = direction.to_delta();
 	#[allow(clippy::cast_possible_wrap)]
@@ -327,6 +345,7 @@ mod tests
 	{
 		let mut moves = Vec::new();
 		let mut visited: HashSet<Board<ROWS, COLUMNS>> = HashSet::new();
-		solve(board, &mut moves, &mut visited)
+		let mut best_min = 0;
+		solve(board, &mut moves, &mut visited, &mut best_min)
 	}
 }

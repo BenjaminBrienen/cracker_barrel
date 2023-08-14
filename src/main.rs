@@ -2,40 +2,42 @@
 #![feature(let_chains)]
 #![warn(clippy::pedantic)]
 
-use std::collections::HashSet;
-
-mod position;
-use position::Position;
-
-mod direction;
-
-mod play;
-use play::Play;
+use {
+	board::{
+		solve,
+		Board,
+		I,
+		O,
+		X,
+	},
+	play::Play,
+	position::Position,
+	std::collections::HashSet,
+};
 
 mod board;
-use board::{
-	solve,
-	Board,
-	I,
-	O,
-	X,
-};
+mod direction;
+mod play;
+mod position;
 
 fn main()
 {
 	// Define the initial board configuration
 	#[rustfmt::skip]
 	let mut board = [
-        [I, I, I, I, X],
-        [I, I, I, X, X],
-        [I, I, X, O, X],
-        [I, X, X, X, X],
-        [X, X, X, X, X]
+		[I, I, X, X, X, I, I],
+		[I, X, X, X, X, X, I],
+		[X, X, X, X, X, X, X],
+		[X, X, X, O, X, X, X],
+		[X, X, X, X, X, X, X],
+		[I, X, X, X, X, X, I],
+		[I, I, X, X, X, I, I],
     ];
 
 	let mut moves = Vec::new();
 	let mut visited = HashSet::new();
-	if solve(&mut board, &mut moves, &mut visited)
+	let mut best_min = usize::MAX;
+	if solve(&mut board, &mut moves, &mut visited, &mut best_min)
 	{
 		println!("Solution found:");
 		print_board(&board);
