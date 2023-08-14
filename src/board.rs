@@ -42,6 +42,7 @@ pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 	{
 		return false
 	}
+	visited.insert(*board);
 
 	// Iterate over each peg cell in the board
 	let valid_moves: Vec<_> = board
@@ -56,22 +57,25 @@ pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 		.filter_map(filter_valid_play::<ROWS, COLUMNS>)
 		.filter(|(_, middle, end)| board[middle.0][middle.1] == X && board[end.0][end.1] == O)
 		.collect();
+
+	// Try all valid moves
 	for (start, middle, end) in valid_moves
 	{
 		// Play the move
 		play_move(board, start, middle, end);
 		plays.push(Play { start, end, state: *board });
+
 		// Recursively solve the remaining board
 		if solve(board, plays, visited)
 		{
 			visited.insert(*board);
-			return true
+			return true;
 		}
-		unplay_move(board, start, middle, end);
+
 		// Undo the play
+		unplay_move(board, start, middle, end);
 		plays.pop();
 	}
-	visited.insert(*board);
 	false
 }
 
