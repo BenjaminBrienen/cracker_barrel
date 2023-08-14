@@ -25,27 +25,13 @@ fn main()
 {
 	// Define the initial board configuration
 	let mut board = vec![
-		vec![None, None, None, None, Some(true)],
-		vec![None, None, None, Some(true), Some(true)],
-		vec![None, None, Some(true), Some(false), Some(true)],
-		vec![None, Some(true), Some(true), Some(true), Some(true)],
-		vec![Some(true), Some(true), Some(true), Some(true), Some(true)],
+		vec![None,       None,       None,       None,        Some(true)],
+		vec![None,       None,       None,       Some(true),  Some(true)],
+		vec![None,       None,       Some(true), Some(false), Some(true)],
+		vec![None,       Some(true), Some(true), Some(true),  Some(true)],
+		vec![Some(true), Some(true), Some(true), Some(true),  Some(true)],
 	];
 
-    // let mut board = vec![
-    //     vec![None, None, None, Some(false)],
-    //     vec![None, None, Some(false), Some(true)],
-    //     vec![None, Some(true), Some(true), Some(false)],
-    //     vec![Some(true), Some(false), Some(true), Some(false)],
-    // ];
-    
-    // let mut board = vec![
-    //     vec![None, None, None, Some(true)],
-    //     vec![None, None, Some(true), Some(true)],
-    //     vec![None, Some(true), Some(true), Some(false)],
-    //     vec![Some(false), Some(true), Some(true), Some(false)],
-    // ];
-    
     let mut moves = Vec::new();
 
 	// Create a HashMap to store visited board configurations
