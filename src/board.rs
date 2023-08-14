@@ -52,10 +52,9 @@ pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 		.filter(|(_, value)| X == **value)
 		.flat_map(|(index, _)| DIRECTIONS.map(|direction| (index, direction)))
 		// Iterate over possible plays
-		.map(|(index, direction)| cell_and_direction_to_play(index / COLUMNS, index % COLUMNS, direction))
+		.map(cell_and_direction_to_play::<COLUMNS>)
 		// Check if the play is valid
-		.filter_map(filter_valid_play::<ROWS, COLUMNS>)
-		.filter(|(_, middle, end)| board[middle.0][middle.1] == X && board[end.0][end.1] == O)
+		.filter_map(|play| filter_valid_play::<ROWS, COLUMNS>(board, play))
 		.collect();
 
 	// Try all valid moves
@@ -79,14 +78,18 @@ pub fn solve<const ROWS: usize, const COLUMNS: usize>(
 	false
 }
 
-fn filter_valid_play<const ROWS: usize, const COLUMNS: usize>((start, middle, end): (Position<isize>, Position<isize>, Position<isize>))
+fn filter_valid_play<const ROWS: usize, const COLUMNS: usize>(board: &Board<ROWS, COLUMNS>, (start, middle, end): (Position<isize>, Position<isize>, Position<isize>))
 	-> Option<(Position<usize>, Position<usize>, Position<usize>)>
 {
 	let max = Position(ROWS, COLUMNS);
 	let min = Position(0, 0);
+	// Play is on the board
 	if let Some(middle) = middle.check_bounds::<usize>(&min, &max)
 	&& let Some(end) = end.check_bounds::<usize>(&min, &max)
 	&& let Some(start) = start.check_bounds::<usize>(&min, &max)
+	// Jump over peg and land in hole
+	&& board[middle.0][middle.1] == X
+	&& board[end.0][end.1] == O
 	{
 		Some((start, middle, end))
 	}
@@ -95,15 +98,13 @@ fn filter_valid_play<const ROWS: usize, const COLUMNS: usize>((start, middle, en
 	}
 }
 
-fn cell_and_direction_to_play(
-	row: usize,
-	column: usize,
-	direction: Direction,
+fn cell_and_direction_to_play<const COLUMNS: usize>(
+	(index, direction): (usize, Direction),
 ) -> (Position<isize>, Position<isize>, Position<isize>)
 {
 	let delta = direction.to_delta();
 	#[allow(clippy::cast_possible_wrap)]
-	let start = Position(row as isize, column as isize);
+	let start = Position((index / COLUMNS) as isize, (index % COLUMNS) as isize);
 	let middle = start + delta;
 	let end = start + delta * 2;
 	(start, middle, end)
