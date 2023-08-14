@@ -1,5 +1,7 @@
 use crate::position::Position;
 
+pub const DIRECTIONS: [Direction; 6] = [Direction::Up, Direction::Down, Direction::Left, Direction::Right, Direction::To, Direction::Fro];
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Direction
 {

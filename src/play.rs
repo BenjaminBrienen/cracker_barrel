@@ -4,9 +4,9 @@ use crate::{
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
-pub struct Play
+pub struct Play<const ROWS: usize, const COLUMNS: usize>
 {
-	pub start_position: Position<usize>,
-	pub end_position:   Position<usize>,
-	pub end_board:      Board,
+	pub start: Position<usize>,
+	pub end:   Position<usize>,
+	pub state: Board<ROWS, COLUMNS>,
 }
