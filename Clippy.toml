@@ -1,0 +1,250 @@
+## approx_constant
+# msrv = None
+
+## arithmetic_side_effects
+arithmetic-side-effects-allowed = []
+arithmetic-side-effects-allowed-binary = []
+arithmetic-side-effects-allowed-unary = []
+
+## borrow_as_ptr
+# msrv = None
+
+## box_collection
+avoid-breaking-exported-api = false
+
+## boxed_local
+too-large-for-stack = 200
+
+## cast_abs_to_unsigned
+# msrv = None
+
+## checked_conversions
+# msrv = None
+
+## cloned_instead_of_copied
+# msrv = None
+
+## cognitive_complexity
+cognitive-complexity-threshold = 25
+
+## dbg_macro
+allow-dbg-in-tests = false
+
+## decimal_literal_representation
+literal-representation-threshold = 16384
+
+## deprecated_cfg_attr
+# msrv = None
+
+## disallowed_macros
+disallowed-macros = []
+
+## disallowed_methods
+disallowed-methods = []
+
+## disallowed_names
+disallowed-names = [".."]
+
+## disallowed_script_idents
+allowed-scripts = [".."]
+
+## disallowed_types
+disallowed-types = []
+
+## doc_markdown
+doc-valid-idents = [".."]
+
+## enum_variant_names
+# avoid-breaking-exported-api = false
+enum-variant-name-threshold = 3
+
+## err_expect
+# msrv = None
+
+## expect_used
+allow-expect-in-tests = false
+
+## filter_map_next
+# msrv = None
+
+## fn_params_excessive_bools
+max-fn-params-bools = 0
+
+## from_over_into
+# msrv = None
+
+## if_then_some_else_none
+# msrv = None
+
+## index_refutable_slice
+# msrv = None
+max-suggested-slice-pattern-length = 3
+
+## large_const_arrays
+array-size-threshold = 512000
+
+## large_enum_variant
+enum-variant-size-threshold = 200
+
+## large_include_file
+max-include-file-size = 1000000
+
+## large_stack_arrays
+# array-size-threshold = 512000
+
+## large_types_passed_by_value
+# avoid-breaking-exported-api = false
+
+## linkedlist
+# avoid-breaking-exported-api = false
+
+## manual_bits
+# msrv = None
+
+## manual_clamp
+# msrv = None
+
+## manual_let_else
+# msrv = None
+matches-for-let-else = "WellKnownTypes"
+
+## manual_non_exhaustive
+# msrv = None
+
+## manual_range_contains
+# msrv = None
+
+## manual_split_once
+# msrv = None
+
+## manual_str_repeat
+# msrv = None
+
+## manual_strip
+# msrv = None
+
+## many_single_char_names
+single-char-binding-names-threshold = 0
+
+## map_clone
+
+## map_unwrap_or
+# msrv = None
+
+## match_like_matches_macro
+# msrv = None
+
+## mem_replace_with_default
+# msrv = None
+
+## mismatched_target_os
+# msrv = None
+
+## missing_const_for_fn
+# msrv = None
+
+## missing_enforced_import_renames
+enforced-import-renames = []
+
+## non_send_fields_in_send_ty
+enable-raw-pointer-heuristic-for-send = true
+
+## nonstandard_macro_braces
+standard-macro-braces = []
+
+## option_as_ref_deref
+# msrv = None
+
+## option_option
+# avoid-breaking-exported-api = false
+
+## print_stderr
+allow-print-in-tests = false
+
+## print_stdout
+# allow-print-in-tests = false
+
+## ptr_as_ptr
+# msrv = None
+
+## rc_buffer
+# avoid-breaking-exported-api = false
+
+## rc_mutex
+# avoid-breaking-exported-api = false
+
+## redundant_allocation
+# avoid-breaking-exported-api = false
+
+## redundant_field_names
+# msrv = None
+
+## redundant_static_lifetimes
+# msrv = None
+
+## result_large_err
+large-error-threshold = 128
+
+## struct_excessive_bools
+max-struct-bools = 0
+
+## too_many_arguments
+too-many-arguments-threshold = 4
+
+## too_many_lines
+too-many-lines-threshold = 100
+
+## trivially_copy_pass_by_ref
+# avoid-breaking-exported-api = false
+# trivial-copy-size-limit = None
+
+## type_complexity
+type-complexity-threshold = 250
+
+## type_repetition_in_bounds
+max-trait-bounds = 1
+
+## unchecked_duration_subtraction
+# msrv = None
+
+## uninlined_format_args
+# msrv = None
+allow-mixed-uninlined-format-args = false
+
+## unnecessary_wraps
+# avoid-breaking-exported-api = false
+
+## unnested_or_patterns
+# msrv = None
+
+## unreadable_literal
+unreadable-literal-lint-fractions = true
+
+## unused_self
+# avoid-breaking-exported-api = false
+
+## unwrap_used
+allow-unwrap-in-tests = false
+
+## upper_case_acronyms
+# avoid-breaking-exported-api = false
+upper-case-acronyms-aggressive = true
+
+## use_self
+# msrv = None
+
+## useless_vec
+# too-large-for-stack = 200
+
+## vec_box
+# avoid-breaking-exported-api = false
+vec-box-size-threshold = 4096
+
+## verbose_bit_mask
+verbose-bit-mask-threshold = 1
+
+## wildcard_imports
+warn-on-all-wildcard-imports = false
+
+## wrong_self_convention
+# avoid-breaking-exported-api = false
