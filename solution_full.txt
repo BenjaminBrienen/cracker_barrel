@@ -1,0 +1,116 @@
+start: Position(4, 1)
+end: Position(2, 3)
+board:
+        O 
+      O O
+    O O O
+  O . O O
+O . O O O
+
+start: Position(3, 4)
+end: Position(3, 2)
+board:
+        O
+      O O
+    O O O
+  O O . .
+O . O O O
+
+start: Position(1, 3)
+end: Position(3, 3)
+board:
+        O
+      . O
+    O . O
+  O O O .
+O . O O O
+
+start: Position(1, 4)
+end: Position(3, 4)
+board:
+        O
+      . .
+    O . .
+  O O O O
+O . O O O
+
+start: Position(3, 1)
+end: Position(1, 3)
+board:
+        O
+      O .
+    . . .
+  . O O O
+O . O O O
+
+start: Position(0, 4)
+end: Position(2, 2)
+board:
+        .
+      . .
+    O . . 
+  . O O O
+O . O O O
+
+start: Position(4, 3)
+end: Position(4, 1)
+board:
+        .
+      . .
+    O . .
+  . O O O
+O O . . O
+
+start: Position(2, 2)
+end: Position(4, 2)
+board:
+        .
+      . .
+    . . .
+  . . O O
+O O O . O
+
+start: Position(4, 1)
+end: Position(4, 3)
+board:
+        .
+      . .
+    . . .
+  . . O O
+O . . O O
+
+start: Position(4, 4)
+end: Position(2, 4)
+board:
+        .
+      . .
+    . . O
+  . . O .
+O . . O .
+
+start: Position(2, 4)
+end: Position(4, 2)
+board:
+        .
+      . .
+    . . .
+  . . . .
+O . O O .
+
+start: Position(4, 3)
+end: Position(4, 1)
+board:
+        .
+      . .
+    . . .
+  . . . .
+O O . . .
+
+start: Position(4, 0)
+end: Position(4, 2)
+board:
+        . 
+      . .
+    . . .
+  . . . .
+. . O . .
